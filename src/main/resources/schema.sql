@@ -1,5 +1,4 @@
 DROP TABLE IF EXISTS passengers;
-
 CREATE TABLE passengers
 (
     PassengerId INT PRIMARY KEY,
@@ -14,4 +13,11 @@ CREATE TABLE passengers
     Fare        DECIMAL(10, 4),
     Cabin       VARCHAR(50),
     Embarked    VARCHAR(5)
+);
+
+CREATE TABLE IF NOT EXISTS stored_queries
+(
+    id         BIGINT AUTO_INCREMENT PRIMARY KEY,
+    query_text TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
