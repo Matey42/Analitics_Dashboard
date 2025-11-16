@@ -1,10 +1,36 @@
+### All queries
+GET http://localhost:8080/queries
 
+### Test 1: Simple where clause
 POST http://localhost:8080/queries
 Content-Type: application/json
 
 {
-  "query": "SELECT * FROM passengers WHERE age > 30"
+    "query": "SELECT * FROM passengers WHERE age > 30"
 }
 
-### All queries
-GET http://localhost:8080/queries
+### Test 2: Add a non-SELECT (DELETE) query [FAIL]
+POST http://localhost:8080/queries
+Content-Type: application/json
+
+{
+  "query": "DELETE FROM passengers WHERE PassengerId = 1"
+}
+
+
+### Test 3: Try to execute the DELETE query (assuming ID=3)
+GET http://localhost:8080/queries/execute?query=2
+
+### Test 4: Add a query with invalid syntax
+POST http://localhost:8080/queries
+Content-Type: application/json
+
+{
+  "query": "SELECT * FROM nonexistent_table"
+}
+
+### Test 5: Try to execute a invalid syntax query
+GET http://localhost:8080/queries/execute?query=3
+
+### Test 6: Try to execute a non-existent query ID
+GET http://localhost:8080/queries/execute?query=999
