@@ -1,0 +1,10 @@
+
+POST http://localhost:8080/queries
+Content-Type: application/json
+
+{
+  "query": "SELECT * FROM passengers WHERE age > 30"
+}
+
+### All queries
+GET http://localhost:8080/queries
