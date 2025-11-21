@@ -43,7 +43,7 @@ public class QueryController {
         StoredQuery storedQuery = queryService.getQueryById(queryId);
 
         if(!executionService.isReadOnlyQuery(storedQuery.getQueryText())){
-            throw new IllegalArgumentException("Only Select queries are allowed");
+            throw new IllegalArgumentException("Only SELECT queries are allowed");
         }
 
         List<List<Object>> result = executionService.executeQuery(storedQuery.getQueryText());

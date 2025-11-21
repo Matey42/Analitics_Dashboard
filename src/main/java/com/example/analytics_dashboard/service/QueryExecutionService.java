@@ -1,5 +1,6 @@
 package com.example.analytics_dashboard.service;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public class QueryExecutionService {
     private final JdbcTemplate jdbcTemplate;
 
-    public QueryExecutionService(JdbcTemplate jdbcTemplate) {
+    public QueryExecutionService(@Qualifier("readOnlyJdbcTemplate") JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
