@@ -39,7 +39,7 @@ public class QueryController {
     }
 
     @GetMapping("/execute")
-    public ResponseEntity<List<List<Object>>> executeQuery(@RequestParam("query") Long queryId) {
+    public ResponseEntity<ExecutionResponse> executeQuery(@RequestParam("query") Long queryId) {
         StoredQuery storedQuery = queryService.getQueryById(queryId);
 
         if(!executionService.isReadOnlyQuery(storedQuery.getQueryText())){
@@ -47,9 +47,9 @@ public class QueryController {
         }
 
         List<List<Object>> result = executionService.executeQuery(storedQuery.getQueryText());
+        ExecutionResponse response = new ExecutionResponse(result);
 
-        // ExecutionResponse response = new ExecutionResponse(result);
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(response);
     }
 
 }
