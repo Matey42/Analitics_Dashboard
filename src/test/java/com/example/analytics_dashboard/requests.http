@@ -34,3 +34,12 @@ GET http://localhost:8080/queries/execute?query=3
 
 ### Test 6: Try to execute a non-existent query ID
 GET http://localhost:8080/queries/execute?query=999
+
+### Test 7: Normal execution
+GET http://localhost:8080/queries/execute?query=1
+
+### Test 8: Async execution
+POST http://localhost:8080/queries/execute/async?query=1
+
+### Test 9: Check status of async execution
+GET http://localhost:8080/queries/execute/async/[Test 8: executionId]
