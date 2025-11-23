@@ -6,6 +6,7 @@ import com.example.analytics_dashboard.dto.QueryResponse;
 import com.example.analytics_dashboard.model.StoredQuery;
 import com.example.analytics_dashboard.service.QueryExecutionService;
 import com.example.analytics_dashboard.service.QueryService;
+import com.example.analytics_dashboard.service.AsyncQueryExecutionService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,9 @@ public class QueryControllerTest {
 
     @MockitoBean
     private QueryExecutionService executionService;
+
+    @MockitoBean
+    private AsyncQueryExecutionService asyncExecutionService;
 
     @Test
     void addQuery_withValidQuery_shouldReturnCreatedWithId() throws Exception {

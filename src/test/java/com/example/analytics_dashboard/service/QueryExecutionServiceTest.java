@@ -7,6 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.util.Arrays;
@@ -34,7 +35,7 @@ public class QueryExecutionServiceTest {
                 Arrays.asList(2, "Jane", 30)
         );
 
-        when(jdbcTemplate.query(eq(sql), any(RowMapper.class)))
+        when(jdbcTemplate.query(eq(sql), any(ResultSetExtractor.class)))
                 .thenReturn(expectedResult);
 
         // Act
@@ -43,7 +44,7 @@ public class QueryExecutionServiceTest {
         // Assert
         assertNotNull(result);
         assertEquals(2, result.size());
-        verify(jdbcTemplate, times(1)).query(eq(sql), any(RowMapper.class));
+        verify(jdbcTemplate, times(1)).query(eq(sql), any(ResultSetExtractor.class));
     }
 
     @Test
@@ -51,7 +52,7 @@ public class QueryExecutionServiceTest {
         // Arrange
         String sql = "SELECT * FROM nonexistent_table";
 
-        when(jdbcTemplate.query(eq(sql), any(RowMapper.class)))
+        when(jdbcTemplate.query(eq(sql), any(ResultSetExtractor.class)))
                 .thenThrow(new DataAccessException("Table not found") {});
 
         // Act & Assert
